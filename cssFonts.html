@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* 
+      CSS at-rule 인 @font-face 를 사용하여 웹페이지의 텍스트에 온라인폰트(online fonts)를 적용할 수 있다. 
+      @font-face 를 사용하여 웹페이지 제작자가 원하는 폰트를 사용할 수 있게 함으로써, 
+      컴퓨터에 설치된 폰트만을 사용해야했던 제약이 없어지게 되었다. 
+
+      문법
+      @font-face {
+        font-family: <a-remote-font-name>;
+        src: <source> [,<source>]*;
+        [font-weight: <weight>];
+        [font-style: <style>];
+      }
+       */
+      @font-face {
+        font-family: "Arcade";
+        src: url("./font/ARCADECLASSIC.TTF");
+      }
+
+      /* 
+      갑자기 div태그로 텍스트를 하나 더 추가해서 위에서 지정한 온라인 폰트를 지정한 이유
+      폰트 관련 캐싱 문제 때문에 해당 폰트가 실제로 사용되기 전까지는
+      pixi에서 생성된 캔버스에 폰트를 initialize 하지 않으려고 하는 것 같다 함.
+
+      그래서 임시 텍스트가 들어갈만한 요소 하나를 추가하고, 거기에 온라인 폰트를 사용한 다음,
+      폰트 사이즈를 0으로 줘버려서 감춰버리면 됨.
+
+      해당 임시 텍스트가 안보이더라도 어쨋든 임시 텍스트에 온라인 폰트를 사용했으니 
+      pixi의 캔버스도 해당 온라인 폰트를 적용할 수 있게 됨.
+       */
+      #useFont {
+        font-family: "Arcade";
+        font-size: 0px;
+        /* display: none; */
+        /* display; none으로 감추는 건 안됨. 이거로 하면 해당 폰트를 사용하지 않은 것으로 간주하고 pixi가 폰트를 initialize 하지 않음 */
+      }
+    </style>
+    <script src="./js/pixi.min.js" defer></script>
+    <script src="./js/cssFonts.js" defer></script>
+  </head>
+  <body>
+    <div id="useFont">A</div>
+  </body>
+</html>
